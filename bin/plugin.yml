@@ -1,0 +1,10 @@
+name: HS-Ranks
+version: 1.0
+author: RySty
+main: mc.rysty.heliosphereranks.HelioSphereRanks
+
+commands:
+  nickname:
+    aliases: [nick]
+  prefix:
+  setgroup:
