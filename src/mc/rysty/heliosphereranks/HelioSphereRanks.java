@@ -14,30 +14,34 @@ import mc.rysty.heliosphereranks.player.DisplayName;
 import mc.rysty.heliosphereranks.player.SetDefaultGroup;
 import mc.rysty.heliosphereranks.setup.Setup;
 import mc.rysty.heliosphereranks.setup.UpdateConfigYaml;
+import mc.rysty.heliosphereranks.utils.GroupsFileManager;
+import mc.rysty.heliosphereranks.utils.PlayersFileManager;
 
 public class HelioSphereRanks extends JavaPlugin {
 
-	public static HelioSphereRanks plugin;
+	private static HelioSphereRanks plugin;
 
 	public static HelioSphereRanks getInstance() {
 		return plugin;
 	}
 
 	public static HashMap<UUID, PermissionAttachment> playerPermissions = new HashMap<>();
-	PluginManager pm = this.getServer().getPluginManager();
 
 	public void onEnable() {
 		plugin = this;
 		saveDefaultConfig();
+		GroupsFileManager.getInstance().setup(this);
+		PlayersFileManager.getInstance().setup(this);
 
 		new Nickname(this);
 		new Prefix(this);
 		new SetGroup(this);
 
-		pm.registerEvents(new SetDefaultGroup(), this);
-		pm.registerEvents(new DisplayName(), this);
-		pm.registerEvents(new Setup(), this);
-		pm.registerEvents(new UpdateConfigYaml(), this);
+		PluginManager pluginManager = this.getServer().getPluginManager();
+		pluginManager.registerEvents(new SetDefaultGroup(), this);
+		pluginManager.registerEvents(new DisplayName(), this);
+		pluginManager.registerEvents(new Setup(), this);
+		pluginManager.registerEvents(new UpdateConfigYaml(), this);
 
 		System.out.println("HS-Ranks enabled");
 	}
