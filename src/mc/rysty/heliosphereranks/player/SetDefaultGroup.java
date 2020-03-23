@@ -10,13 +10,13 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 import mc.rysty.heliosphereranks.HelioSphereRanks;
 
-public class Permissions implements Listener {
+public class SetDefaultGroup implements Listener {
 
 	private HelioSphereRanks plugin = HelioSphereRanks.getInstance();
 
 	@EventHandler
-	public void onJoin(PlayerJoinEvent e) {
-		Player player = e.getPlayer();
+	public void onJoin(PlayerJoinEvent event) {
+		Player player = event.getPlayer();
 		UUID playerId = player.getUniqueId();
 		FileConfiguration config = plugin.getConfig();
 

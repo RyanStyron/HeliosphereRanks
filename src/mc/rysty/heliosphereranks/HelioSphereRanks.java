@@ -11,7 +11,7 @@ import mc.rysty.heliosphereranks.commands.Nickname;
 import mc.rysty.heliosphereranks.commands.Prefix;
 import mc.rysty.heliosphereranks.commands.SetGroup;
 import mc.rysty.heliosphereranks.player.DisplayName;
-import mc.rysty.heliosphereranks.player.Permissions;
+import mc.rysty.heliosphereranks.player.SetDefaultGroup;
 import mc.rysty.heliosphereranks.setup.Setup;
 import mc.rysty.heliosphereranks.setup.UpdateConfigYaml;
 
@@ -34,7 +34,7 @@ public class HelioSphereRanks extends JavaPlugin {
 		new Prefix(this);
 		new SetGroup(this);
 
-		pm.registerEvents(new Permissions(), this);
+		pm.registerEvents(new SetDefaultGroup(), this);
 		pm.registerEvents(new DisplayName(), this);
 		pm.registerEvents(new Setup(), this);
 		pm.registerEvents(new UpdateConfigYaml(), this);
