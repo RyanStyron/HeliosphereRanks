@@ -39,8 +39,8 @@ public class HelioSphereRanks extends JavaPlugin {
 
 		PluginManager pluginManager = this.getServer().getPluginManager();
 		pluginManager.registerEvents(new SetDefaultGroup(), this);
-		pluginManager.registerEvents(new DisplayName(), this);
 		pluginManager.registerEvents(new Setup(), this);
+		pluginManager.registerEvents(new DisplayName(), this);
 		pluginManager.registerEvents(new UpdateConfigYaml(), this);
 
 		System.out.println("HS-Ranks enabled");
