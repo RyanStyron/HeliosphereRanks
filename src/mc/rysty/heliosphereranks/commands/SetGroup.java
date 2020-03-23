@@ -3,7 +3,6 @@ package mc.rysty.heliosphereranks.commands;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,65 +11,63 @@ import org.bukkit.entity.Player;
 
 import mc.rysty.heliosphereranks.HelioSphereRanks;
 import mc.rysty.heliosphereranks.setup.Setup;
+import mc.rysty.heliosphereranks.utils.GroupsFileManager;
+import mc.rysty.heliosphereranks.utils.MessageUtils;
+import mc.rysty.heliosphereranks.utils.PlayersFileManager;
 
 public class SetGroup implements CommandExecutor {
 
-	private HelioSphereRanks plugin = HelioSphereRanks.getInstance();
-	private FileConfiguration config = plugin.getConfig();
+	private PlayersFileManager playersFileManager = PlayersFileManager.getInstance();
+	private FileConfiguration playersFile = playersFileManager.getData();
+	private GroupsFileManager groupsFileManager = GroupsFileManager.getInstance();
+	private FileConfiguration groupsFile = groupsFileManager.getData();
 
 	public SetGroup(HelioSphereRanks plugin) {
 		plugin.getCommand("setgroup").setExecutor(this);
 	}
 
-	private ChatColor aqua = ChatColor.AQUA;
-	private ChatColor darkAqua = ChatColor.DARK_AQUA;
-	private ChatColor gray = ChatColor.GRAY;
-	private ChatColor red = ChatColor.RED;
-	private ChatColor bold = ChatColor.BOLD;
-
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if (command.getName().equalsIgnoreCase("setgroup")) {
-			if (sender.hasPermission("hs.setgroups")) {
-				if (args.length == 1) {
-					sender.sendMessage(aqua + "" + bold + ">> " + red
-							+ "Not enough arguments were provided! Correct format: /setgroup <player> <group>");
-					return false;
+			if (sender.hasPermission("hs.setgroup")) {
+				if (args.length == 0 || args.length == 1) {
+					MessageUtils.message(sender,
+							"&4&l(!)&c Not enough arguments were provided! Correct usage: /setgroup <player> <group>");
 				} else if (args.length == 2) {
-					Player player = Bukkit.getPlayer(args[0]);
+					Player target = Bukkit.getPlayer(args[0]);
 
-					if (player == null) {
-						sender.sendMessage(aqua + "" + bold + ">> " + red + "Could not find the specified player");
-						return false;
-					}
-					UUID playerId = player.getUniqueId();
-					String rank = args[1];
-
-					if (config.getString("Groups." + rank) != null) {
-						if (config.getString("Players." + playerId + ".group") != rank) {
-							config.set("Players." + playerId + ".group", rank);
-							sender.sendMessage(aqua + "" + bold + ">> " + gray + player.getDisplayName()
-									+ "'s group has been set to " + darkAqua + rank);
-							plugin.saveConfig();
-							
-							Setup.setupPermissions(player);
-						} else {
-							sender.sendMessage(
-									aqua + "" + bold + ">> " + red + "The player is already a member of this group!");
-						}
+					if (target == null) {
+						MessageUtils.message(sender, "&4&l(!)&c You need to provide a valid player.");
 					} else {
-						sender.sendMessage(aqua + "" + bold + "�� " + red
-								+ "The group provided does not exist (case sensitivity is required)");
+						UUID targetId = target.getUniqueId();
+						String group = args[1].toLowerCase();
+
+						if (groupsFile.getString("Groups." + group) != null) {
+							if (playersFile.getString("Players." + targetId + ".group") != group) {
+								playersFile.set("Players." + targetId + ".group", group);
+								playersFileManager.saveData();
+
+								Setup.setupPermissions(target);
+
+								if (sender.getName() != target.getName()) {
+									MessageUtils.message(target,
+											"&6&l(!)&e Your group has been set to&b " + group + " &e.");
+								}
+								MessageUtils.message(sender, "&6&l(!)&e The group of " + target.getDisplayName()
+										+ " &ehas been set to&b " + group + "&e.");
+							} else {
+								MessageUtils.message(sender, "&4&l(!)&c The player is already a member of this group.");
+							}
+						} else {
+							MessageUtils.message(sender, "&4&l(!)&c The group provided does not exist.");
+						}
 					}
-				} else if (args.length == 0) {
-					sender.sendMessage(aqua + "" + bold + "�� " + red
-							+ "Not enough arguments were provided! Correct format: /setgroup <player> <group>");
 				} else if (args.length > 2) {
-					sender.sendMessage(aqua + "" + bold + ">> " + red
-							+ "Too many arguments were provided! Correct format: /setgroup <player> <group>");
+					MessageUtils.message(sender,
+							"&4&l(!)&c Too many arguments were provided! Correct usage: /setgroup <player> <group>");
 				}
 			} else {
-				sender.sendMessage(aqua + "" + bold + ">> " + red + "You do not have permission to do this");
+				MessageUtils.message(sender, "&4&l(!)&c You do not have permission to execute this command.");
 			}
 		}
 		return false;
