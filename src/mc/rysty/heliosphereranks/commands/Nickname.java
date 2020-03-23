@@ -15,8 +15,6 @@ import mc.rysty.heliosphereranks.utils.PlayersFileManager;
 
 public class Nickname implements CommandExecutor {
 
-	private HelioSphereRanks plugin = HelioSphereRanks.getInstance();
-	private FileConfiguration config = plugin.getConfig();
 	private PlayersFileManager playersFileManager = PlayersFileManager.getInstance();
 	private FileConfiguration playersFile = playersFileManager.getData();
 
@@ -33,14 +31,13 @@ public class Nickname implements CommandExecutor {
 				String nickname = "";
 
 				if (args.length == 0) {
-					MessageUtils.message(sender, config
-							.getString("&4&l(!)&c Not enough arguments were provided. Usage: /nickname [player] <nickname>"));
+					MessageUtils.message(sender, "&4&l(!)&c Not enough arguments were provided. Usage: /nickname [player] <nickname>");
 				} else if (args.length == 1) {
 					if (sender instanceof Player) {
 						target = (Player) sender;
 						nickname = args[0];
 					} else {
-						MessageUtils.message(sender, config.getString("&4&l(!)&c Only players can execute this commmand."));
+						MessageUtils.message(sender, "&4&l(!)&c Only players can execute this commmand.");
 					}
 				} else if (args.length == 2) {
 					target = Bukkit.getPlayer(args[0]);
