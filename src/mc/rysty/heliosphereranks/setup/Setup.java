@@ -16,31 +16,32 @@ import mc.rysty.heliosphereranks.HelioSphereRanks;
 
 public class Setup implements Listener {
 
-	HelioSphereRanks plugin = HelioSphereRanks.getInstance();
-	FileConfiguration config = plugin.getConfig();
-	HashMap<UUID, PermissionAttachment> pP = HelioSphereRanks.playerPermissions;
+	private static HelioSphereRanks plugin = HelioSphereRanks.getInstance();
+	private static FileConfiguration config = plugin.getConfig();
+	private static HashMap<UUID, PermissionAttachment> playerPermissions = HelioSphereRanks.playerPermissions;
 
 	@EventHandler
-	public void join(PlayerJoinEvent event) {
+	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
+		
 		setupPermissions(player);
 	}
 
 	@EventHandler
-	public void leave(PlayerQuitEvent event) {
+	public void onPlayerLevae(PlayerQuitEvent event) {
 		Player player = event.getPlayer();
-		pP.remove(player.getUniqueId());
+		playerPermissions.remove(player.getUniqueId());
 	}
 
-	public void setupPermissions(Player player) {
+	public static void setupPermissions(Player player) {
 		PermissionAttachment attachment = player.addAttachment(HelioSphereRanks.getInstance());
-		pP.put(player.getUniqueId(), attachment);
+		playerPermissions.put(player.getUniqueId(), attachment);
 		permissionsSetter(player.getUniqueId());
 
 	}
 
-	private void permissionsSetter(UUID uuid) {
-		PermissionAttachment attachment = pP.get(uuid);
+	private static void permissionsSetter(UUID uuid) {
+		PermissionAttachment attachment = playerPermissions.get(uuid);
 		UUID playerId = Bukkit.getPlayer(uuid).getUniqueId();
 		String playerName = Bukkit.getPlayer(uuid).getName();
 
@@ -66,6 +67,5 @@ public class Setup implements Listener {
 		} else {
 			System.out.println("HS-Ranks: " + playerName + " has no group.");
 		}
-
 	}
 }
