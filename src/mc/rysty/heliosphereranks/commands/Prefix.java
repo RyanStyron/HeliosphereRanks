@@ -3,7 +3,6 @@ package mc.rysty.heliosphereranks.commands;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -11,11 +10,13 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import mc.rysty.heliosphereranks.HelioSphereRanks;
+import mc.rysty.heliosphereranks.utils.MessageUtils;
+import mc.rysty.heliosphereranks.utils.PlayersFileManager;
 
 public class Prefix implements CommandExecutor {
 
-	HelioSphereRanks plugin = HelioSphereRanks.getInstance();
-	FileConfiguration config = plugin.getConfig();
+	private PlayersFileManager playersFileManager = PlayersFileManager.getInstance();
+	private FileConfiguration playersFile = playersFileManager.getData();
 
 	public Prefix(HelioSphereRanks plugin) {
 		plugin.getCommand("prefix").setExecutor(this);
@@ -25,40 +26,62 @@ public class Prefix implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if (command.getName().equalsIgnoreCase("prefix")) {
 			if (sender.hasPermission("hs.prefix")) {
-				if (args.length == 1) {
-					sender.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + "�� " + ChatColor.RED
-							+ "Not enough arguments were provided! Correct format: /prefix <player> <prefix>");
-					return false;
+				String senderName = sender.getName();
+				Player target = null;
+				String prefix = "";
+
+				if (args.length == 0) {
+					MessageUtils.message(sender,
+							"&4&l(!)&c Not enough arguments were provided! Correct format: /prefix [player] <prefix>");
+				} else if (args.length == 1) {
+					if (sender instanceof Player) {
+						target = (Player) sender;
+						prefix = args[0];
+					} else {
+						MessageUtils.message(sender,
+								"&4&l(!)&c Not enough arguments were provided! Correct format: /prefix [player] <prefix>");
+					}
 				} else if (args.length == 2) {
-					Player p = Bukkit.getPlayer(args[0]);
+					target = Bukkit.getPlayer(args[0]);
+					prefix = args[1];
 
-					if (p == null) {
-						sender.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + "�� " + ChatColor.RED
-								+ "Could not find the specified player");
-						return false;
+					if (!sender.hasPermission("hs.prefix.other")) {
+						if (target.getName() != senderName) {
+							target = null;
+							prefix = "";
+							MessageUtils.message(sender,
+									"&cYou do not have permission to edit the prefix of other players. Usage: /prefix <prefix>");
+						}
 					}
-					UUID playerId = p.getUniqueId();
-
-					if (config.getString("Players." + playerId + ".prefix") == null) {
-						config.createSection("Players." + playerId + ".prefix");
-					}
-					config.set("Players." + playerId + ".prefix", args[1]);
-					plugin.saveConfig();
-					sender.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + "�� " + ChatColor.GRAY + p.getName()
-							+ "'s prefix has been set to " + args[1].replaceAll("&", "�"));
-				} else if (args.length == 0) {
-					sender.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + "�� " + ChatColor.RED
-							+ "Not enough arguments were provided! Correct format: /prefix <player> <prefix>");
 				} else if (args.length > 2) {
-					sender.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + "�� " + ChatColor.RED
-							+ "Too many arguments were provided! Correct format: /prefix <player> <prefix>");
+					MessageUtils.message(sender,
+							"&4&l(!)&c Too many arguments were provided! Correct format: /prefix [player] <prefix>");
+				}
+
+				if (target == null) {
+					MessageUtils.message(sender, "&4&l(!)&c You need to provide a valid player.");
+				} else {
+					prefix = prefix.replaceAll("&", "§");
+					UUID targetId = target.getUniqueId();
+					String targetName = target.getName();
+
+					if (prefix != "reset") {
+						playersFile.set("Players." + targetId + ".prefix", prefix);
+						playersFileManager.saveData();
+					} else {
+						MessageUtils.message(sender, "&4&l(!)&c Please provide a valid prefix!");
+					}
+
+					if (targetName != senderName) {
+						MessageUtils.message(target, "&6&l(!) &eYour prefix has been set to " + prefix + "&e.");
+					}
+					MessageUtils.message(sender,
+							"&6&l(!)&e " + target.getName() + "&e's prefix has been set to " + prefix + "&e.");
 				}
 			} else {
-				sender.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + "�� " + ChatColor.RED
-						+ "You do not have permission to do this");
+				MessageUtils.message(sender, "&4&l(!)&c You do not have permission to execute this command.");
 			}
 		}
 		return false;
 	}
-
 }
