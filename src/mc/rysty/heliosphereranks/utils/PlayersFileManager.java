@@ -13,8 +13,7 @@ import org.bukkit.plugin.PluginDescriptionFile;
 
 public class PlayersFileManager {
 
-    private PlayersFileManager() {
-	}
+    private PlayersFileManager() {}
 
 	static PlayersFileManager instance = new PlayersFileManager();
 

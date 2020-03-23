@@ -13,8 +13,7 @@ import org.bukkit.plugin.PluginDescriptionFile;
 
 public class GroupsFileManager {
 
-    private GroupsFileManager() {
-    }
+    private GroupsFileManager() {}
 
     static GroupsFileManager instance = new GroupsFileManager();
 
