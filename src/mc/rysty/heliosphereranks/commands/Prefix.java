@@ -26,14 +26,14 @@ public class Prefix implements CommandExecutor {
 		if (command.getName().equalsIgnoreCase("prefix")) {
 			if (sender.hasPermission("hs.prefix")) {
 				if (args.length == 1) {
-					sender.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + "›› " + ChatColor.RED
+					sender.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + "ï¿½ï¿½ " + ChatColor.RED
 							+ "Not enough arguments were provided! Correct format: /prefix <player> <prefix>");
 					return false;
 				} else if (args.length == 2) {
 					Player p = Bukkit.getPlayer(args[0]);
 
 					if (p == null) {
-						sender.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + "›› " + ChatColor.RED
+						sender.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + "ï¿½ï¿½ " + ChatColor.RED
 								+ "Could not find the specified player");
 						return false;
 					}
@@ -44,17 +44,17 @@ public class Prefix implements CommandExecutor {
 					}
 					config.set("Players." + playerId + ".prefix", args[1]);
 					plugin.saveConfig();
-					sender.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + "›› " + ChatColor.GRAY + p.getName()
-							+ "'s prefix has been set to " + args[1].replaceAll("&", "§"));
+					sender.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + "ï¿½ï¿½ " + ChatColor.GRAY + p.getName()
+							+ "'s prefix has been set to " + args[1].replaceAll("&", "ï¿½"));
 				} else if (args.length == 0) {
-					sender.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + "›› " + ChatColor.RED
+					sender.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + "ï¿½ï¿½ " + ChatColor.RED
 							+ "Not enough arguments were provided! Correct format: /prefix <player> <prefix>");
 				} else if (args.length > 2) {
-					sender.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + "›› " + ChatColor.RED
+					sender.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + "ï¿½ï¿½ " + ChatColor.RED
 							+ "Too many arguments were provided! Correct format: /prefix <player> <prefix>");
 				}
 			} else {
-				sender.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + "›› " + ChatColor.RED
+				sender.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + "ï¿½ï¿½ " + ChatColor.RED
 						+ "You do not have permission to do this");
 			}
 		}
