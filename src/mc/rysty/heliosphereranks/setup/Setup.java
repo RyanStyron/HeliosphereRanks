@@ -34,17 +34,20 @@ public class Setup implements Listener {
 	@EventHandler
 	public void onPlayerLeave(PlayerQuitEvent event) {
 		Player player = event.getPlayer();
+
 		playerPermissions.remove(player.getUniqueId());
 	}
 
 	public static void setupPermissions(Player player) {
-		if (playerPermissions != null)
-			playerPermissions.clear();
+		UUID playerId = player.getUniqueId();
+
+		if (playerPermissions.get(playerId) != null)
+			playerPermissions.remove(playerId);
 
 		PermissionAttachment attachment = player.addAttachment(plugin);
-		playerPermissions.put(player.getUniqueId(), attachment);
+		playerPermissions.put(playerId, attachment);
 
-		permissionsSetter(player.getUniqueId());
+		permissionsSetter(playerId);
 	}
 
 	private static void permissionsSetter(UUID uuid) {
