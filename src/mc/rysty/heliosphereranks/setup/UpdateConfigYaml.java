@@ -11,12 +11,12 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import mc.rysty.heliosphereranks.HelioSphereRanks;
+import mc.rysty.heliosphereranks.utils.PlayersFileManager;
 
 public class UpdateConfigYaml implements Listener {
 
-	private HelioSphereRanks plugin = HelioSphereRanks.getInstance();
-	private FileConfiguration config = plugin.getConfig();
+	private PlayersFileManager playersFileManager = PlayersFileManager.getInstance();
+	private FileConfiguration playersFile = playersFileManager.getData();
 
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
@@ -55,15 +55,14 @@ public class UpdateConfigYaml implements Listener {
 		String displayName = player.getDisplayName();
 		UUID playerId = player.getUniqueId();
 
-		if (config.getString("Players." + playerId + ".username") != playerName) {
-			config.set("Players." + playerId + ".username", playerName);
-			plugin.saveConfig();
+		if (playersFile.getString("Players." + playerId + ".username") != playerName) {
+			playersFile.set("Players." + playerId + ".username", playerName);
+			playersFileManager.saveData();
 		}
 
-		if (config.getString("Players." + playerId + ".displayname") != displayName) {
-			config.set("Players." + playerId + ".displayname", displayName);
-			plugin.saveConfig();
+		if (playersFile.getString("Players." + playerId + ".displayname") != displayName) {
+			playersFile.set("Players." + playerId + ".displayname", displayName);
+			playersFileManager.saveData();
 		}
 	}
-
 }
