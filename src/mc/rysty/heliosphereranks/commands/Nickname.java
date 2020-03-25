@@ -33,6 +33,7 @@ public class Nickname implements CommandExecutor {
 				if (args.length == 0) {
 					MessageUtils.message(sender,
 							"&4&l(!)&c Not enough arguments were provided. Usage: /nickname [player] <nickname>");
+					return false;
 				} else if (args.length == 1) {
 					if (sender instanceof Player) {
 						target = (Player) sender;
@@ -46,12 +47,15 @@ public class Nickname implements CommandExecutor {
 					nickname = args[1];
 
 					if (!sender.hasPermission("hs.nickname.other")) {
-						if (target.getName() != senderName) {
-							target = null;
-							nickname = "";
-							MessageUtils.message(sender,
-									"&cYou do not have permission to nickname other players. Usage: /nickname <nickname>");
-						}
+						if (target != null) {
+							if (target.getName() != senderName) {
+								target = null;
+								nickname = "";
+								MessageUtils.message(sender,
+										"&cYou do not have permission to nickname other players. Usage: /nickname <nickname>");
+							}
+						} else
+							MessageUtils.message(sender, "&4&l(!)&c You need to provide a valid player.");
 					}
 				} else {
 					MessageUtils.message(sender, "&4&l(!)&c Too many arguments were provided.");
@@ -68,8 +72,8 @@ public class Nickname implements CommandExecutor {
 						MessageUtils.message(sender, "&6&l(!)&e The nickname of " + targetName + " &ehas been reset.");
 					} else {
 						playersFile.set("Players." + targetId + ".nickname", nickname);
-						MessageUtils.message(sender,
-								"&6&l(!)&e The nickname of " + targetName + " &ehas been to set to " + nickname + "&e.");
+						MessageUtils.message(sender, "&6&l(!)&e The nickname of " + targetName
+								+ " &ehas been to set to " + nickname + "&e.");
 					}
 					playersFileManager.saveData();
 
