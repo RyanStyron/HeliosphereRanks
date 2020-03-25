@@ -41,6 +41,7 @@ public class Nickname implements CommandExecutor {
 					} else {
 						MessageUtils.message(sender,
 								"&4&l(!)&c Not enough arguments were provided. Usage: /nickname [player] <nickname>");
+						return false;
 					}
 				} else if (args.length == 2) {
 					target = Bukkit.getPlayer(args[0]);
@@ -53,6 +54,7 @@ public class Nickname implements CommandExecutor {
 								nickname = "";
 								MessageUtils.message(sender,
 										"&cYou do not have permission to nickname other players. Usage: /nickname <nickname>");
+								return false;
 							}
 						} else {
 							MessageUtils.message(sender, "&4&l(!)&c You need to provide a valid player.");

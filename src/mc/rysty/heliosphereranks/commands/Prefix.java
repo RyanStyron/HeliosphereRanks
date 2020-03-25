@@ -53,6 +53,7 @@ public class Prefix implements CommandExecutor {
 								prefix = "";
 								MessageUtils.message(sender,
 										"&cYou do not have permission to edit the prefix of other players. Usage: /prefix <prefix>");
+								return false;
 							}
 						} else {
 							MessageUtils.message(sender, "&4&l(!)&c You need to provide a valid player.");
@@ -77,6 +78,7 @@ public class Prefix implements CommandExecutor {
 						playersFileManager.saveData();
 					} else {
 						MessageUtils.message(sender, "&4&l(!)&c Please provide a valid prefix!");
+						return false;
 					}
 
 					if (targetName != senderName) {

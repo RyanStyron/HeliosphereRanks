@@ -49,12 +49,17 @@ public class SetGroup implements CommandExecutor {
 
 								Setup.setupPermissions(target);
 
+								String groupPrefix = "";
+
+								if (groupsFile.getString("Groups." + group + ".prefix") != null)
+									groupPrefix = groupsFile.getString("Groups." + group + ".prefix");
+
 								if (sender.getName() != target.getName()) {
 									MessageUtils.message(target,
-											"&6&l(!)&e Your group has been set to&b " + group + " &e.");
+											"&6&l(!)&e Your group has been set to&b " + groupPrefix + group + "&e.");
 								}
 								MessageUtils.message(sender, "&6&l(!)&e The group of " + target.getDisplayName()
-										+ " &ehas been set to&b " + group + "&e.");
+										+ " &ehas been set to&b " + groupPrefix + group + "&e.");
 							} else {
 								MessageUtils.message(sender, "&4&l(!)&c The player is already a member of this group.");
 							}
