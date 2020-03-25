@@ -10,6 +10,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import mc.rysty.heliosphereranks.utils.GroupsFileManager;
+import mc.rysty.heliosphereranks.utils.MessageUtils;
 import mc.rysty.heliosphereranks.utils.PlayersFileManager;
 
 public class DisplayName implements Listener {
@@ -36,10 +37,11 @@ public class DisplayName implements Listener {
 	private void setDisplayName(Player player) {
 		UUID playerId = player.getUniqueId();
 		String playerName = player.getName();
+		String displayName = playerName;
 
 		// Set the player's display name to only their nickname.
 		if (playersFile.getString("Players." + playerId + ".nickname") != null) {
-			player.setDisplayName(playersFile.getString("Players." + playerId + ".nickname"));
+			displayName = playersFile.getString("Players." + playerId + ".nickname");
 		}
 
 		// Check for if the player is a member of a group.
@@ -48,30 +50,34 @@ public class DisplayName implements Listener {
 
 			// Set the player's display name to only their group's prefix if it has one.
 			if (groupsFile.getString("Groups." + playerGroup + ".prefix") != null) {
-				String groupPrefix = groupsFile.getString("Groups." + playerGroup + ".prefix").replaceAll("&", "§");
+				String groupPrefix = groupsFile.getString("Groups." + playerGroup + ".prefix");
 
-				player.setDisplayName(groupPrefix + playerName);
+				displayName = groupPrefix + playerName;
 
-				// Set the player's display name to their group's prefix and nickname if they.
+				// Set the player's display name to their group's prefix and nickname.
 				if (playersFile.getString("Players." + playerId + ".nickname") != null) {
 					String nickname = playersFile.getString("Players." + playerId + ".nickname");
 
-					player.setDisplayName(groupPrefix + nickname);
+					displayName = groupPrefix + nickname;
 				}
 			}
 		}
 
 		// Set the player's display name to their personal prefix if they have one.
 		if (playersFile.getString("Players." + playerId + ".prefix") != null) {
-			String personalPrefix = playersFile.getString("Players." + playerId + ".prefix").replaceAll("&", "§");
+			String personalPrefix = playersFile.getString("Players." + playerId + ".prefix");
 
-			player.setDisplayName(personalPrefix + playerName);
+			displayName = personalPrefix + playerName;
+
 			// Set the player's display name to their personal prefix and nickname.
 			if (playersFile.getString("Players." + playerId + ".nickname") != null) {
 				String nickname = playersFile.getString("Players." + playerId + ".nickname");
 
-				player.setDisplayName(personalPrefix + nickname);
+				displayName = personalPrefix + nickname;
 			}
 		}
+
+		if (displayName != playerName)
+			player.setDisplayName(MessageUtils.convertChatColors(displayName));
 	}
 }

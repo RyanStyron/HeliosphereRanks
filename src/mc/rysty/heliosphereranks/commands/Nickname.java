@@ -60,22 +60,25 @@ public class Nickname implements CommandExecutor {
 				if (target == null) {
 					MessageUtils.message(sender, "&4&l(!)&c You need to provide a valid player.");
 				} else {
-					nickname = nickname.replaceAll("&", "§");
 					UUID targetId = target.getUniqueId();
 					String targetName = target.getName();
 
-					if (nickname != "reset") {
-						playersFile.set("Players." + targetId + ".nickname", nickname);
+					if (nickname.equalsIgnoreCase("reset")) {
+						playersFile.set("Players." + targetId + ".nickname", null);
+						MessageUtils.message(sender, "&6&l(!)&e The nickname of " + targetName + " &ehas been reset.");
 					} else {
-						playersFile.set("Players." + targetId + ".nickname", targetName);
+						playersFile.set("Players." + targetId + ".nickname", nickname);
+						MessageUtils.message(sender,
+								"&6&l(!)&e The nickname of " + targetName + " &ehas been to set to " + nickname + "&e.");
 					}
 					playersFileManager.saveData();
 
 					if (targetName != senderName) {
-						MessageUtils.message(target, "&6&l(!) &eYour nickname has been set to " + nickname + "&e.");
+						if (playersFile.getString("Players." + targetId + ".nickname") != null)
+							MessageUtils.message(target, "&6&l(!) &eYour nickname has been set to " + nickname + "&e.");
+						else
+							MessageUtils.message(target, "&6&l(!) &eYour nickname has been reset.");
 					}
-					MessageUtils.message(sender,
-							"&6&l(!)&e The nickname of " + targetName + " &ehas been to set to " + nickname + ".");
 				}
 			} else {
 				MessageUtils.message(sender, "&4&l(!)&c You do not have permission to do this.");

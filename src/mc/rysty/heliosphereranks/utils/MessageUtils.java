@@ -5,7 +5,7 @@ import org.bukkit.command.CommandSender;
 
 public class MessageUtils {
 
-	private static String convertChatColors(String string) {
+	public static String convertChatColors(String string) {
 		return ChatColor.translateAlternateColorCodes('&', string);
 	}
 
