@@ -33,6 +33,7 @@ public class Prefix implements CommandExecutor {
 				if (args.length == 0) {
 					MessageUtils.message(sender,
 							"&4&l(!)&c Not enough arguments were provided! Correct format: /prefix [player] <prefix>");
+					return false;
 				} else if (args.length == 1) {
 					if (sender instanceof Player) {
 						target = (Player) sender;
@@ -46,16 +47,21 @@ public class Prefix implements CommandExecutor {
 					prefix = args[1];
 
 					if (!sender.hasPermission("hs.prefix.other")) {
-						if (target.getName() != senderName) {
-							target = null;
-							prefix = "";
-							MessageUtils.message(sender,
-									"&cYou do not have permission to edit the prefix of other players. Usage: /prefix <prefix>");
+						if (target != null) {
+							if (target.getName() != senderName) {
+								target = null;
+								prefix = "";
+								MessageUtils.message(sender,
+										"&cYou do not have permission to edit the prefix of other players. Usage: /prefix <prefix>");
+							}
+						} else {
+							MessageUtils.message(sender, "&4&l(!)&c You need to provide a valid player.");
 						}
 					}
 				} else if (args.length > 2) {
 					MessageUtils.message(sender,
 							"&4&l(!)&c Too many arguments were provided! Correct format: /prefix [player] <prefix>");
+					return false;
 				}
 
 				if (target == null) {

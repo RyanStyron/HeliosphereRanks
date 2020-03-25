@@ -59,6 +59,7 @@ public class Nickname implements CommandExecutor {
 					}
 				} else {
 					MessageUtils.message(sender, "&4&l(!)&c Too many arguments were provided.");
+					return false;
 				}
 
 				if (target == null) {
