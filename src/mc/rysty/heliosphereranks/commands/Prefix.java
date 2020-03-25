@@ -56,6 +56,7 @@ public class Prefix implements CommandExecutor {
 							}
 						} else {
 							MessageUtils.message(sender, "&4&l(!)&c You need to provide a valid player.");
+							return false;
 						}
 					}
 				} else if (args.length > 2) {

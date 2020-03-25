@@ -54,8 +54,10 @@ public class Nickname implements CommandExecutor {
 								MessageUtils.message(sender,
 										"&cYou do not have permission to nickname other players. Usage: /nickname <nickname>");
 							}
-						} else
+						} else {
 							MessageUtils.message(sender, "&4&l(!)&c You need to provide a valid player.");
+							return false;
+						}
 					}
 				} else {
 					MessageUtils.message(sender, "&4&l(!)&c Too many arguments were provided.");
