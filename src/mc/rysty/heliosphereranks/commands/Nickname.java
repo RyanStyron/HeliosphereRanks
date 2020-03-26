@@ -75,8 +75,6 @@ public class Nickname implements CommandExecutor {
 								targetName);
 					} else {
 						playersFile.set("Players." + targetId + ".nickname", nickname);
-						MessageUtils.message(sender, "&6&l(!)&e The nickname of " + targetName
-								+ " &ehas been to set to " + nickname + "&e.");
 						MessageUtils.configStringMessage(sender, "nickname.nickname-set-message", "<player>",
 								targetName, "<nickname>", nickname);
 					}
@@ -87,7 +85,7 @@ public class Nickname implements CommandExecutor {
 							MessageUtils.configStringMessage(target, "nickname.nickname-set-target-message",
 									"<nickname>", nickname);
 						else
-							MessageUtils.configStringMessage(target, "nickname-reset-target-message");
+							MessageUtils.configStringMessage(target, "nickname.nickname-reset-target-message");
 					}
 				}
 			} else {
