@@ -1,3 +1,7 @@
-Groups:
-  user:
-    prefix: '&8[&7User&8]&7'
+#messages
+console-error-message: "&4&l(!)&c This command can only be executed by a player."
+no-perm-message: "&c&l(!)&c You do not have permission to do this."
+player-offline-message: "&4&l(!)&c You need to provide a valid player."
+
+
+
