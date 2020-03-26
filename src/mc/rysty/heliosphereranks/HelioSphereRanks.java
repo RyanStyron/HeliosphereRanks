@@ -13,7 +13,7 @@ import mc.rysty.heliosphereranks.commands.SetGroup;
 import mc.rysty.heliosphereranks.player.DisplayName;
 import mc.rysty.heliosphereranks.player.SetDefaultGroup;
 import mc.rysty.heliosphereranks.setup.Setup;
-import mc.rysty.heliosphereranks.setup.UpdateConfigYaml;
+import mc.rysty.heliosphereranks.setup.UpdateYamlFiles;
 import mc.rysty.heliosphereranks.utils.GroupsFileManager;
 import mc.rysty.heliosphereranks.utils.PlayersFileManager;
 
@@ -41,7 +41,7 @@ public class HelioSphereRanks extends JavaPlugin {
 		pluginManager.registerEvents(new SetDefaultGroup(), this);
 		pluginManager.registerEvents(new Setup(), this);
 		pluginManager.registerEvents(new DisplayName(), this);
-		pluginManager.registerEvents(new UpdateConfigYaml(), this);
+		pluginManager.registerEvents(new UpdateYamlFiles(), this);
 
 		System.out.println("HS-Ranks enabled");
 	}

@@ -13,7 +13,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import mc.rysty.heliosphereranks.utils.PlayersFileManager;
 
-public class UpdateConfigYaml implements Listener {
+public class UpdateYamlFiles implements Listener {
 
 	private PlayersFileManager playersFileManager = PlayersFileManager.getInstance();
 	private FileConfiguration playersFile = playersFileManager.getData();
