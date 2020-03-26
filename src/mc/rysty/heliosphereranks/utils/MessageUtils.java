@@ -22,6 +22,16 @@ public class MessageUtils {
         message(sender, config.getString(configString));
     }
 
+    public static void configStringMessage(CommandSender sender, String configString, String regex,
+            String replacement) {
+        message(sender, config.getString(configString).replaceAll(regex, replacement));
+    }
+
+    public static void configStringMessage(CommandSender sender, String configString, String regex, String replacement,
+            String regex2, String replacement2) {
+        message(sender, config.getString(configString).replaceAll(regex, replacement).replaceAll(regex2, replacement2));
+    }
+
     public static void noPermissionMessage(CommandSender sender) {
         configStringMessage(sender, "no-perm-message");
     }

@@ -31,16 +31,14 @@ public class Nickname implements CommandExecutor {
 				String nickname = "";
 
 				if (args.length == 0) {
-					MessageUtils.message(sender,
-							"&4&l(!)&c Not enough arguments were provided. Usage: /nickname [player] <nickname>");
+					MessageUtils.configStringMessage(sender, "nickname.argument-error");
 					return false;
 				} else if (args.length == 1) {
 					if (sender instanceof Player) {
 						target = (Player) sender;
 						nickname = args[0];
 					} else {
-						MessageUtils.message(sender,
-								"&4&l(!)&c Not enough arguments were provided. Usage: /nickname [player] <nickname>");
+						MessageUtils.configStringMessage(sender, "nickname.argument-error");
 						return false;
 					}
 				} else if (args.length == 2) {
@@ -52,8 +50,7 @@ public class Nickname implements CommandExecutor {
 							if (target.getName() != senderName) {
 								target = null;
 								nickname = "";
-								MessageUtils.message(sender,
-										"&cYou do not have permission to nickname other players. Usage: /nickname <nickname>");
+								MessageUtils.configStringMessage(sender, "nickname.permission-error");
 								return false;
 							}
 						} else {
@@ -62,7 +59,7 @@ public class Nickname implements CommandExecutor {
 						}
 					}
 				} else {
-					MessageUtils.message(sender, "&4&l(!)&c Too many arguments were provided.");
+					MessageUtils.configStringMessage(sender, "nickname.argument-error");
 					return false;
 				}
 
@@ -74,19 +71,23 @@ public class Nickname implements CommandExecutor {
 
 					if (nickname.equalsIgnoreCase("reset")) {
 						playersFile.set("Players." + targetId + ".nickname", null);
-						MessageUtils.message(sender, "&6&l(!)&e The nickname of " + targetName + " &ehas been reset.");
+						MessageUtils.configStringMessage(sender, "nickname.nickname-reset-message", "<player>",
+								targetName);
 					} else {
 						playersFile.set("Players." + targetId + ".nickname", nickname);
 						MessageUtils.message(sender, "&6&l(!)&e The nickname of " + targetName
 								+ " &ehas been to set to " + nickname + "&e.");
+						MessageUtils.configStringMessage(sender, "nickname.nickname-set-message", "<player>",
+								targetName, "<nickname>", nickname);
 					}
 					playersFileManager.saveData();
 
 					if (targetName != senderName) {
 						if (playersFile.getString("Players." + targetId + ".nickname") != null)
-							MessageUtils.message(target, "&6&l(!) &eYour nickname has been set to " + nickname + "&e.");
+							MessageUtils.configStringMessage(target, "nickname.nickname-set-target-message",
+									"<nickname>", nickname);
 						else
-							MessageUtils.message(target, "&6&l(!) &eYour nickname has been reset.");
+							MessageUtils.configStringMessage(target, "nickname-reset-target-message");
 					}
 				}
 			} else {

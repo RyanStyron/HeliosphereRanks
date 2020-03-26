@@ -1,7 +1,21 @@
-#messages
+# Messages
+
+# Standard Messages
+
 console-error-message: "&4&l(!)&c This command can only be executed by a player."
 no-perm-message: "&c&l(!)&c You do not have permission to do this."
 player-offline-message: "&4&l(!)&c You need to provide a valid player."
 
+# Command Messages
+
+# Nickname Command Message
+nickname:
+  argument-error: "&4&l(!)&c A valid amount of arguments must be provided. Usage: /nickname [player] <nickname>"
+  permission-error: "&4&l(!)&c You do not have permission to nickname other players. Usage: /nickname <nickname>"
+  nickname-reset-message: "&6&l(!)&e The nickname of <player> &ehas been reset."
+  nickname-set-message: "&6&l(!)&e The nickname of <player> &ehas been to set to <nickname>&e."
+  nickname-set-target-message: "&6&l(!) &eYour nickname has been set to <nickname>&e."
+  nickname-reset-target-message: "&6&l(!) &eYour nickname has been reset."
+  
 
 
