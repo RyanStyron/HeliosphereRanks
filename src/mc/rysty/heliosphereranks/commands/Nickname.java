@@ -57,7 +57,7 @@ public class Nickname implements CommandExecutor {
 								return false;
 							}
 						} else {
-							MessageUtils.message(sender, "&4&l(!)&c You need to provide a valid player.");
+							MessageUtils.invalidPlayerMessage(sender);
 							return false;
 						}
 					}
@@ -67,7 +67,7 @@ public class Nickname implements CommandExecutor {
 				}
 
 				if (target == null) {
-					MessageUtils.message(sender, "&4&l(!)&c You need to provide a valid player.");
+					MessageUtils.invalidPlayerMessage(sender);
 				} else {
 					UUID targetId = target.getUniqueId();
 					String targetName = target.getName();
@@ -90,7 +90,7 @@ public class Nickname implements CommandExecutor {
 					}
 				}
 			} else {
-				MessageUtils.message(sender, "&4&l(!)&c You do not have permission to do this.");
+				MessageUtils.noPermissionMessage(sender);
 			}
 		}
 		return false;

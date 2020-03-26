@@ -37,7 +37,7 @@ public class SetGroup implements CommandExecutor {
 					Player target = Bukkit.getPlayer(args[0]);
 
 					if (target == null) {
-						MessageUtils.message(sender, "&4&l(!)&c You need to provide a valid player.");
+						MessageUtils.invalidPlayerMessage(sender);
 					} else {
 						UUID targetId = target.getUniqueId();
 						String group = args[1].toLowerCase();
@@ -72,7 +72,7 @@ public class SetGroup implements CommandExecutor {
 							"&4&l(!)&c Too many arguments were provided! Correct usage: /setgroup <player> <group>");
 				}
 			} else {
-				MessageUtils.message(sender, "&4&l(!)&c You do not have permission to execute this command.");
+				MessageUtils.noPermissionMessage(sender);
 			}
 		}
 		return false;

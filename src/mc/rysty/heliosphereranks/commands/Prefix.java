@@ -56,7 +56,7 @@ public class Prefix implements CommandExecutor {
 								return false;
 							}
 						} else {
-							MessageUtils.message(sender, "&4&l(!)&c You need to provide a valid player.");
+							MessageUtils.invalidPlayerMessage(sender);
 							return false;
 						}
 					}
@@ -67,7 +67,7 @@ public class Prefix implements CommandExecutor {
 				}
 
 				if (target == null) {
-					MessageUtils.message(sender, "&4&l(!)&c You need to provide a valid player.");
+					MessageUtils.invalidPlayerMessage(sender);
 				} else {
 					prefix = prefix.replaceAll("&", "§");
 					UUID targetId = target.getUniqueId();
@@ -88,7 +88,7 @@ public class Prefix implements CommandExecutor {
 							"&6&l(!)&e " + target.getName() + "&e's prefix has been set to " + prefix + "&e.");
 				}
 			} else {
-				MessageUtils.message(sender, "&4&l(!)&c You do not have permission to execute this command.");
+				MessageUtils.noPermissionMessage(sender);
 			}
 		}
 		return false;
