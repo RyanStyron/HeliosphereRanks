@@ -8,7 +8,7 @@ player-offline-message: "&4&l(!)&c You need to provide a valid player."
 
 # Command Messages
 
-# Nickname Command Message
+# Nickname Command Messages
 nickname:
   argument-error: "&4&l(!)&c A valid amount of arguments must be provided. Usage: /nickname [player] <nickname>"
   permission-error: "&4&l(!)&c You do not have permission to nickname other players. Usage: /nickname <nickname>"
@@ -16,6 +16,16 @@ nickname:
   nickname-set-message: "&6&l(!)&e The nickname of <player> &ehas been to set to <nickname>&e."
   nickname-set-target-message: "&6&l(!) &eYour nickname has been set to <nickname>&e."
   nickname-reset-target-message: "&6&l(!) &eYour nickname has been reset."
+
+# Prefix Command Messages
+prefix:
+  argument-error: "A valid amount of arguments must be provided. Usage: /prefix [player] <prefix>"
+  permission-error: "&4&l(!)&c You do not have permission to edit the prefix of other players. Usage: /prefix <prefix>"
+  invalid-prefix-error: "&4&l(!)&c Please provide a valid prefix!"
+  prefix-set-message: "&6&l(!)&e The prefix of <player> &ehas been set."
+  prefix-set-target-message: "&6&l(!)&e Your prefix has been changed."
+
+
   
 
 
