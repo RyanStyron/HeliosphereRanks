@@ -31,8 +31,7 @@ public class SetGroup implements CommandExecutor {
 		if (command.getName().equalsIgnoreCase("setgroup")) {
 			if (sender.hasPermission("hs.setgroup")) {
 				if (args.length == 0 || args.length == 1) {
-					MessageUtils.message(sender,
-							"&4&l(!)&c Not enough arguments were provided! Correct usage: /setgroup <player> <group>");
+					MessageUtils.configStringMessage(sender, "setgroup.argument-error");
 				} else if (args.length == 2) {
 					Player target = Bukkit.getPlayer(args[0]);
 
@@ -55,21 +54,20 @@ public class SetGroup implements CommandExecutor {
 									groupPrefix = groupsFile.getString("Groups." + group + ".prefix");
 
 								if (sender.getName() != target.getName()) {
-									MessageUtils.message(target,
-											"&6&l(!)&e Your group has been set to&b " + groupPrefix + group + "&e.");
+									MessageUtils.configStringMessage(target, "setgroup.group-set-target-message",
+											"<group>", groupPrefix + group);
 								}
-								MessageUtils.message(sender, "&6&l(!)&e The group of " + target.getDisplayName()
-										+ " &ehas been set to&b " + groupPrefix + group + "&e.");
+								MessageUtils.configStringMessage(sender, "setgroup.group-set-message", "<player>",
+										target.getDisplayName(), "<group>", groupPrefix + group);
 							} else {
-								MessageUtils.message(sender, "&4&l(!)&c The player is already a member of this group.");
+								MessageUtils.configStringMessage(sender, "setgroup.group-already-set-error");
 							}
 						} else {
-							MessageUtils.message(sender, "&4&l(!)&c The group provided does not exist.");
+							MessageUtils.configStringMessage(sender, "setgroup.group-does-not-exist-error");
 						}
 					}
 				} else if (args.length > 2) {
-					MessageUtils.message(sender,
-							"&4&l(!)&c Too many arguments were provided! Correct usage: /setgroup <player> <group>");
+					MessageUtils.configStringMessage(sender, "setgroup.argument-error");
 				}
 			} else {
 				MessageUtils.noPermissionMessage(sender);

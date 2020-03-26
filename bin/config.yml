@@ -19,11 +19,19 @@ nickname:
 
 # Prefix Command Messages
 prefix:
-  argument-error: "A valid amount of arguments must be provided. Usage: /prefix [player] <prefix>"
+  argument-error: "&4&l(!)&c A valid amount of arguments must be provided. Usage: /prefix [player] <prefix>"
   permission-error: "&4&l(!)&c You do not have permission to edit the prefix of other players. Usage: /prefix <prefix>"
   invalid-prefix-error: "&4&l(!)&c Please provide a valid prefix!"
   prefix-set-message: "&6&l(!)&e The prefix of <player> &ehas been set."
   prefix-set-target-message: "&6&l(!)&e Your prefix has been changed."
+
+# SetGroup Command Messages
+setgroup:
+  argument-error: "&4&l(!)&c A valid amount of arguments must be provided. Usage: /setgroup <player> <group>"
+  group-does-not-exist-error: "&4&l(!)&c The group provided does not exist."
+  group-already-set-error: "&4&l(!)&c The player is already a member of this group."
+  group-set-message: "&6&l(!)&e The group of <player> &ehas been set to&b <group>&e."
+  group-set-target-message: "&6&l(!)&e Your group has been set to&b <group>&e."
 
 
   
