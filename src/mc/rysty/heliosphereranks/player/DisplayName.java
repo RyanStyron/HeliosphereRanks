@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import mc.rysty.heliosphereranks.utils.GroupsFileManager;
@@ -28,6 +29,13 @@ public class DisplayName implements Listener {
 	}
 
 	@EventHandler
+	public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
+		Player player = event.getPlayer();
+
+		setDisplayName(player);
+	}
+
+	@EventHandler
 	public void onJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
 
@@ -37,6 +45,7 @@ public class DisplayName implements Listener {
 	private void setDisplayName(Player player) {
 		UUID playerId = player.getUniqueId();
 		String playerName = player.getName();
+		String previousDisplayName = player.getDisplayName();
 		String displayName = playerName;
 
 		// Set the player's display name to only their nickname.
@@ -77,7 +86,7 @@ public class DisplayName implements Listener {
 			}
 		}
 
-		if (displayName != playerName)
+		if (displayName != previousDisplayName)
 			player.setDisplayName(MessageUtils.convertChatColors(displayName));
 	}
 }
