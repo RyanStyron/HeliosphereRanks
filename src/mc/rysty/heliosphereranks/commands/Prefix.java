@@ -65,7 +65,6 @@ public class Prefix implements CommandExecutor {
 				if (target == null) {
 					MessageUtils.invalidPlayerMessage(sender);
 				} else {
-					prefix = prefix.replaceAll("&", "§");
 					UUID targetId = target.getUniqueId();
 					String targetName = target.getName();
 
@@ -80,8 +79,7 @@ public class Prefix implements CommandExecutor {
 					if (targetName != senderName) {
 						MessageUtils.configStringMessage(target, "prefix.prefix-set-target-message");
 					}
-					MessageUtils.configStringMessage(sender, "prefix.prefix-set-message", "<player>",
-							target.getDisplayName());
+					MessageUtils.configStringMessage(sender, "prefix.prefix-set-message", "<player>", targetName);
 				}
 			} else {
 				MessageUtils.noPermissionMessage(sender);
