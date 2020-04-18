@@ -68,10 +68,10 @@ public class Setup implements Listener {
 				List<String> permissionsList = new ArrayList<>();
 				for (String playerPermissions : groupsFile.getStringList("Groups." + playerGroup + ".permissions")) {
 					if (playerPermissions != null) {
+						attachment.setPermission(playerPermissions, true);
 						permissionsList.add(playerPermissions);
 						System.out.println(
 								playerName + "'s Permissions: " + ListUtils.fromList(permissionsList, false, false));
-						attachment.setPermission(playerPermissions, true);
 					} else
 						System.out.println("HS-Ranks: " + playerName + "'s group has no permissions.");
 				}
