@@ -1,7 +1,9 @@
 package mc.rysty.heliosphereranks.setup;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -14,6 +16,7 @@ import org.bukkit.permissions.PermissionAttachment;
 
 import mc.rysty.heliosphereranks.HelioSphereRanks;
 import mc.rysty.heliosphereranks.utils.GroupsFileManager;
+import mc.rysty.heliosphereranks.utils.ListUtils;
 import mc.rysty.heliosphereranks.utils.PlayersFileManager;
 
 public class Setup implements Listener {
@@ -62,19 +65,19 @@ public class Setup implements Listener {
 				System.out.println("HS-Ranks: " + playerName + " has a group that exists.");
 				System.out.println("HS-Ranks: " + playerName + " is a member of group " + playerGroup + ".");
 
+				List<String> permissionsList = new ArrayList<>();
 				for (String playerPermissions : groupsFile.getStringList("Groups." + playerGroup + ".permissions")) {
 					if (playerPermissions != null) {
-						System.out.println(playerName + "'s Permissions: " + playerPermissions);
+						permissionsList.add(playerPermissions);
+						System.out.println(
+								playerName + "'s Permissions: " + ListUtils.fromList(permissionsList, false, false));
 						attachment.setPermission(playerPermissions, true);
-					} else {
+					} else
 						System.out.println("HS-Ranks: " + playerName + "'s group has no permissions.");
-					}
 				}
-			} else {
+			} else
 				System.out.println("HS-Ranks: " + playerName + "'s group is not valid.");
-			}
-		} else {
+		} else
 			System.out.println("HS-Ranks: " + playerName + " has no group.");
-		}
 	}
 }
