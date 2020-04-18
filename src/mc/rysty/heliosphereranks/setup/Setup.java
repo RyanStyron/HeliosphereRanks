@@ -70,11 +70,10 @@ public class Setup implements Listener {
 					if (playerPermissions != null) {
 						attachment.setPermission(playerPermissions, true);
 						permissionsList.add(playerPermissions);
-						System.out.println(
-								playerName + "'s Permissions: " + ListUtils.fromList(permissionsList, false, false));
 					} else
 						System.out.println("HS-Ranks: " + playerName + "'s group has no permissions.");
 				}
+				System.out.println(playerName + "'s Permissions: " + ListUtils.fromList(permissionsList, false, false));
 			} else
 				System.out.println("HS-Ranks: " + playerName + "'s group is not valid.");
 		} else
