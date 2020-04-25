@@ -1,11 +1,14 @@
 package mc.rysty.heliosphereranks.commands;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
@@ -15,7 +18,7 @@ import mc.rysty.heliosphereranks.utils.GroupsFileManager;
 import mc.rysty.heliosphereranks.utils.MessageUtils;
 import mc.rysty.heliosphereranks.utils.PlayersFileManager;
 
-public class SetGroup implements CommandExecutor {
+public class SetGroup implements CommandExecutor, TabCompleter {
 
 	private PlayersFileManager playersFileManager = PlayersFileManager.getInstance();
 	private FileConfiguration playersFile = playersFileManager.getData();
@@ -24,6 +27,7 @@ public class SetGroup implements CommandExecutor {
 
 	public SetGroup(HelioSphereRanks plugin) {
 		plugin.getCommand("setgroup").setExecutor(this);
+		plugin.getCommand("setgroup").setTabCompleter(this);
 	}
 
 	@Override
@@ -74,5 +78,19 @@ public class SetGroup implements CommandExecutor {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
+		if (args.length == 2) {
+			List<String> groups = new ArrayList<>();
+
+			if (groupsFile.getConfigurationSection("Groups") != null) {
+				for (String key : groupsFile.getConfigurationSection("Groups").getKeys(false))
+					groups.add(key);
+				return groups;
+			}
+		}
+		return null;
 	}
 }
