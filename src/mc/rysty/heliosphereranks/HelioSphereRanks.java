@@ -7,6 +7,7 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import mc.rysty.heliosphereranks.commands.ListGroups;
 import mc.rysty.heliosphereranks.commands.Nickname;
 import mc.rysty.heliosphereranks.commands.Prefix;
 import mc.rysty.heliosphereranks.commands.SetGroup;
@@ -36,6 +37,7 @@ public class HelioSphereRanks extends JavaPlugin {
 		new Nickname(this);
 		new Prefix(this);
 		new SetGroup(this);
+		new ListGroups(this);
 
 		PluginManager pluginManager = this.getServer().getPluginManager();
 		pluginManager.registerEvents(new SetDefaultGroup(), this);
