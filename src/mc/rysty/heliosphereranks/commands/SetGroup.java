@@ -34,19 +34,19 @@ public class SetGroup implements CommandExecutor, TabCompleter {
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if (command.getName().equalsIgnoreCase("setgroup")) {
 			if (sender.hasPermission("hs.setgroup")) {
-				if (args.length == 0 || args.length == 1) {
+				if (args.length != 2)
 					MessageUtils.configStringMessage(sender, "setgroup.argument-error");
-				} else if (args.length == 2) {
+				else {
 					Player target = Bukkit.getPlayer(args[0]);
 
-					if (target == null) {
+					if (target == null)
 						MessageUtils.invalidPlayerMessage(sender);
-					} else {
+					else {
 						UUID targetId = target.getUniqueId();
 						String group = args[1].toLowerCase();
 
 						if (groupsFile.getString("Groups." + group) != null) {
-							if (playersFile.getString("Players." + targetId + ".group") != group) {
+							if (!playersFile.getString("Players." + targetId + ".group").equals(group)) {
 								playersFile.set("Players." + targetId + ".group", group);
 								playersFileManager.saveData();
 
@@ -57,25 +57,19 @@ public class SetGroup implements CommandExecutor, TabCompleter {
 								if (groupsFile.getString("Groups." + group + ".prefix") != null)
 									groupPrefix = groupsFile.getString("Groups." + group + ".prefix");
 
-								if (sender.getName() != target.getName()) {
+								if (sender.getName() != target.getName())
 									MessageUtils.configStringMessage(target, "setgroup.group-set-target-message",
 											"<group>", groupPrefix + group);
-								}
 								MessageUtils.configStringMessage(sender, "setgroup.group-set-message", "<player>",
 										target.getDisplayName(), "<group>", groupPrefix + group);
-							} else {
+							} else
 								MessageUtils.configStringMessage(sender, "setgroup.group-already-set-error");
-							}
-						} else {
+						} else
 							MessageUtils.configStringMessage(sender, "setgroup.group-does-not-exist-error");
-						}
 					}
-				} else if (args.length > 2) {
-					MessageUtils.configStringMessage(sender, "setgroup.argument-error");
 				}
-			} else {
+			} else
 				MessageUtils.noPermissionMessage(sender);
-			}
 		}
 		return false;
 	}
