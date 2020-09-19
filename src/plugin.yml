@@ -1,7 +1,8 @@
 name: HS-Ranks
-version: 1.0
+version: 2.1
 author: RySty
 main: mc.rysty.heliosphereranks.HelioSphereRanks
+api-version: 1.16
 
 commands:
   nickname:

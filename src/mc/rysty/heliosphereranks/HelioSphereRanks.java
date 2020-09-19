@@ -29,17 +29,20 @@ public class HelioSphereRanks extends JavaPlugin {
 	public static HashMap<UUID, PermissionAttachment> playerPermissions = new HashMap<>();
 
 	public void onEnable() {
+		/* Plugin Setup. */
 		plugin = this;
 		saveDefaultConfig();
 		GroupsFileManager.getInstance().setup(this);
 		PlayersFileManager.getInstance().setup(this);
+		PluginManager pluginManager = this.getServer().getPluginManager();
 
+		/* Commands. */
 		new Nickname(this);
 		new Prefix(this);
 		new SetGroup(this);
 		new ListGroups(this);
 
-		PluginManager pluginManager = this.getServer().getPluginManager();
+		/* Listeners. */
 		pluginManager.registerEvents(new SetDefaultGroup(), this);
 		pluginManager.registerEvents(new Setup(), this);
 		pluginManager.registerEvents(new DisplayName(), this);
