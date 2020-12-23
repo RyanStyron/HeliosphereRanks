@@ -11,11 +11,11 @@ import org.bukkit.entity.Player;
 
 import mc.rysty.heliosphereranks.HelioSphereRanks;
 import mc.rysty.heliosphereranks.utils.MessageUtils;
-import mc.rysty.heliosphereranks.utils.PlayersFileManager;
+import mc.rysty.heliosphereranks.utils.filemanagers.PlayersFileManager;
 
 public class Nickname implements CommandExecutor {
 
-	private PlayersFileManager playersFileManager = PlayersFileManager.getInstance();
+	private PlayersFileManager playersFileManager = HelioSphereRanks.getPlayersFile();
 	private FileConfiguration playersFile = playersFileManager.getData();
 
 	public Nickname(HelioSphereRanks plugin) {

@@ -13,16 +13,16 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import mc.rysty.heliosphereranks.HelioSphereRanks;
-import mc.rysty.heliosphereranks.setup.Setup;
-import mc.rysty.heliosphereranks.utils.GroupsFileManager;
+import mc.rysty.heliosphereranks.setup.PermissionSetup;
 import mc.rysty.heliosphereranks.utils.MessageUtils;
-import mc.rysty.heliosphereranks.utils.PlayersFileManager;
+import mc.rysty.heliosphereranks.utils.filemanagers.GroupsFileManager;
+import mc.rysty.heliosphereranks.utils.filemanagers.PlayersFileManager;
 
 public class SetGroup implements CommandExecutor, TabCompleter {
 
-	private PlayersFileManager playersFileManager = PlayersFileManager.getInstance();
+	private PlayersFileManager playersFileManager = HelioSphereRanks.getPlayersFile();
 	private FileConfiguration playersFile = playersFileManager.getData();
-	private GroupsFileManager groupsFileManager = GroupsFileManager.getInstance();
+	private GroupsFileManager groupsFileManager = HelioSphereRanks.getGroupsFile();
 	private FileConfiguration groupsFile = groupsFileManager.getData();
 
 	public SetGroup(HelioSphereRanks plugin) {
@@ -50,7 +50,7 @@ public class SetGroup implements CommandExecutor, TabCompleter {
 								playersFile.set("Players." + targetId + ".group", group);
 								playersFileManager.saveData();
 
-								Setup.setupPermissions(target);
+								PermissionSetup.setupPermissions(target);
 
 								String groupPrefix = "";
 

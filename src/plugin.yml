@@ -9,4 +9,4 @@ commands:
     aliases: [nick]
   prefix:
   setgroup:
-  listgroups:
+  grouppermission:

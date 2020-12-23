@@ -1,39 +1,35 @@
-# Messages
+console-error-message: "&c&l(!)&f This command can only be executed by a player."
+no-perm-message: "&c&l(!)&f You do not have permission to do this."
+player-offline-message: "&c&l(!)&f You need to provide a valid player."
+argument-error: "&c&l(!)&f Valid arguments must be provided. Usage: <usage>"
 
-# Standard Messages
-
-console-error-message: "&4&l(!)&c This command can only be executed by a player."
-no-perm-message: "&c&l(!)&c You do not have permission to do this."
-player-offline-message: "&4&l(!)&c You need to provide a valid player."
-
-# Command Messages
-
-# Nickname Command Messages
 nickname:
-  argument-error: "&4&l(!)&c A valid amount of arguments must be provided. Usage: /nickname [player] <nickname>"
-  permission-error: "&4&l(!)&c You do not have permission to nickname other players. Usage: /nickname <nickname>"
-  nickname-reset-message: "&6&l(!)&e The nickname of <player> &ehas been reset."
-  nickname-set-message: "&6&l(!)&e The nickname of <player> &ehas been to set to <nickname>&e."
-  nickname-set-target-message: "&6&l(!) &eYour nickname has been set to <nickname>&e."
-  nickname-reset-target-message: "&6&l(!) &eYour nickname has been reset."
+  argument-error: "&c&l(!)&f A valid amount of arguments must be provided. Usage: /nickname [player] <nickname>"
+  permission-error: "&c&l(!)&f You do not have permission to nickname other players. Usage: /nickname <nickname>"
+  nickname-reset-message: "&6&l(!)&f The nickname of <player>&f has been reset."
+  nickname-set-message: "&6&l(!)&f The nickname of <player>&f has been to set to <nickname>&f."
+  nickname-set-target-message: "&6&l(!)&f Your nickname has been set to <nickname>&f."
+  nickname-reset-target-message: "&6&l(!)&f Your nickname has been reset."
 
-# Prefix Command Messages
 prefix:
-  argument-error: "&4&l(!)&c A valid amount of arguments must be provided. Usage: /prefix [player] <prefix>"
-  permission-error: "&4&l(!)&c You do not have permission to edit the prefix of other players. Usage: /prefix <prefix>"
-  invalid-prefix-error: "&4&l(!)&c Please provide a valid prefix!"
-  prefix-set-message: "&6&l(!)&e The prefix of <player> &ehas been set."
-  prefix-set-target-message: "&6&l(!)&e Your prefix has been changed."
+  argument-error: "&c&l(!)&f A valid amount of arguments must be provided. Usage: /prefix [player] <prefix>"
+  permission-error: "&c&l(!)&f You do not have permission to edit the prefix of other players. Usage: /prefix <prefix>"
+  invalid-prefix-error: "&c&l(!)&f Please provide a valid prefix!"
+  prefix-set-message: "&6&l(!)&f The prefix of <player>&f has been set."
+  prefix-set-target-message: "&6&l(!)&f Your prefix has been changed."
 
-# SetGroup Command Messages
 setgroup:
-  argument-error: "&4&l(!)&c A valid amount of arguments must be provided. Usage: /setgroup <player> <group>"
-  group-does-not-exist-error: "&4&l(!)&c The group provided does not exist."
-  group-already-set-error: "&4&l(!)&c The player is already a member of this group."
-  group-set-message: "&6&l(!)&e The group of <player> &ehas been set to&b <group>&e."
-  group-set-target-message: "&6&l(!)&e Your group has been set to&b <group>&e."
+  argument-error: "&c&l(!)&f A valid amount of arguments must be provided. Usage: /setgroup <player> <group>"
+  group-does-not-exist-error: "&c&l(!)&f The group provided does not exist."
+  group-already-set-error: "&c&l(!)&f The player is already a member of this group."
+  group-set-message: "&6&l(!)&f The group of <player>&f has been set to &b<group>&f."
+  group-set-target-message: "&6&l(!)&f Your group has been set to &b<group>&f."
 
-
-  
-
-
+grouppermission:
+  group-error: "&c&l(!)&f The group provided does not exist."
+  group-has-permission-error: "&c&l(!)&f The group already has this permission."
+  group-no-permission-error: "&c&l(!)&f The group does not have this permission."
+  group-permission-added: "&6&l(!)&f The permission has been added to the group."
+  group-permission-removed: "&6&l(!)&f The permission has been removed from the group."
+  permission-check-true: "&6&l(!)&f The group has this permission."
+  permission-check-false: "&6&l(!)&f The group does not have this permission."

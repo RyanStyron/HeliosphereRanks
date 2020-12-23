@@ -1,4 +1,4 @@
-package mc.rysty.heliosphereranks.utils;
+package mc.rysty.heliosphereranks.utils.filemanagers;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,22 +9,14 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginDescriptionFile;
 
 public class PlayersFileManager {
 
-    private PlayersFileManager() {}
-
-	static PlayersFileManager instance = new PlayersFileManager();
+	private static PlayersFileManager instance = new PlayersFileManager();
 
 	public static PlayersFileManager getInstance() {
 		return instance;
 	}
-
-	private Plugin plugin;
-
-	private FileConfiguration config;
-	private File configFile;
 
 	private FileConfiguration data;
     private File dataFile;
@@ -32,12 +24,8 @@ public class PlayersFileManager {
     private Logger serverLogger = Bukkit.getServer().getLogger();
 
 	public void setup(Plugin plugin) {
-		configFile = new File(plugin.getDataFolder(), "config.yml");
-		config = plugin.getConfig();
-
 		if (!plugin.getDataFolder().exists()) 
 			plugin.getDataFolder().mkdir();
-
 		dataFile = new File(plugin.getDataFolder(), "players.yml");
 
 		if (!dataFile.exists()) {
@@ -64,25 +52,5 @@ public class PlayersFileManager {
 
 	public void reloadData() {
 		data = YamlConfiguration.loadConfiguration(dataFile);
-	}
-
-	public FileConfiguration getConfig() {
-		return config;
-	}
-
-	public void saveConfig() {
-		try {
-			config.save(configFile);
-		} catch (IOException e) {
-			serverLogger.severe(ChatColor.RED + "Could not save config.yml!");
-		}
-	}
-
-	public void reloadConfig() {
-		config = YamlConfiguration.loadConfiguration(configFile);
-	}
-
-	public PluginDescriptionFile getDesc() {
-		return plugin.getDescription();
 	}
 }

@@ -8,46 +8,26 @@ import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.permissions.PermissionAttachment;
 
 import mc.rysty.heliosphereranks.HelioSphereRanks;
-import mc.rysty.heliosphereranks.utils.GroupsFileManager;
 import mc.rysty.heliosphereranks.utils.ListUtils;
-import mc.rysty.heliosphereranks.utils.PlayersFileManager;
 
-public class Setup implements Listener {
+public class PermissionSetup {
 
 	private static HelioSphereRanks plugin = HelioSphereRanks.getInstance();
-	private static FileConfiguration playersFile = PlayersFileManager.getInstance().getData();
-	private static FileConfiguration groupsFile = GroupsFileManager.getInstance().getData();
+	private static FileConfiguration playersFile = HelioSphereRanks.getPlayersFile().getData();
+	private static FileConfiguration groupsFile = HelioSphereRanks.getGroupsFile().getData();
 
-	private static HashMap<UUID, PermissionAttachment> playerPermissions = HelioSphereRanks.playerPermissions;
-
-	@EventHandler
-	public void onPlayerJoin(PlayerJoinEvent event) {
-		Player player = event.getPlayer();
-
-		setupPermissions(player);
-	}
-
-	@EventHandler
-	public void onPlayerLeave(PlayerQuitEvent event) {
-		Player player = event.getPlayer();
-
-		playerPermissions.remove(player.getUniqueId());
-	}
+	private static HashMap<UUID, PermissionAttachment> playerPermissions = HelioSphereRanks.permissionsMap;
 
 	public static void setupPermissions(Player player) {
 		UUID playerId = player.getUniqueId();
 
 		if (playerPermissions.get(playerId) != null)
 			playerPermissions.remove(playerId);
-
 		PermissionAttachment attachment = player.addAttachment(plugin);
+
 		playerPermissions.put(playerId, attachment);
 
 		permissionsSetter(playerId);
@@ -66,6 +46,7 @@ public class Setup implements Listener {
 				System.out.println("HS-Ranks: " + playerName + " is a member of group " + playerGroup + ".");
 
 				List<String> permissionsList = new ArrayList<>();
+
 				for (String playerPermissions : groupsFile.getStringList("Groups." + playerGroup + ".permissions")) {
 					if (playerPermissions != null) {
 						attachment.setPermission(playerPermissions, true);

@@ -43,4 +43,8 @@ public class MessageUtils {
     public static void invalidPlayerMessage(CommandSender sender) {
         configStringMessage(sender, "player-offline-message");
     }
+
+    public static void argumentError(CommandSender sender, String usage) {
+        configStringMessage(sender, "argument-error", "<usage>", usage);
+    }
 }
