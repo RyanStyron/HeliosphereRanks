@@ -13,6 +13,7 @@ import mc.rysty.heliosphereranks.commands.SetGroup;
 import mc.rysty.heliosphereranks.listeners.ListenerPlayerJoin;
 import mc.rysty.heliosphereranks.listeners.ListenerPluginEnable;
 import mc.rysty.heliosphereranks.utils.filemanagers.GroupsFileManager;
+import mc.rysty.heliosphereranks.utils.filemanagers.LevelsFileManager;
 import mc.rysty.heliosphereranks.utils.filemanagers.PlayersFileManager;
 
 public class HelioSphereRanks extends JavaPlugin {
@@ -25,6 +26,7 @@ public class HelioSphereRanks extends JavaPlugin {
 
 	private static GroupsFileManager groupsFileManager = GroupsFileManager.getInstance();
 	private static PlayersFileManager playersFileManager = PlayersFileManager.getInstance();
+	private static LevelsFileManager levelsFileManager = LevelsFileManager.getInstance();
 
 	public static HashMap<UUID, PermissionAttachment> permissionsMap = new HashMap<>();
 
@@ -35,6 +37,7 @@ public class HelioSphereRanks extends JavaPlugin {
 		saveDefaultConfig();
 		groupsFileManager.setup(this);
 		playersFileManager.setup(this);
+		levelsFileManager.setup(this);
 
 		/* Listeners. */
 		ListenerPluginEnable.enableScheduler();
@@ -61,5 +64,9 @@ public class HelioSphereRanks extends JavaPlugin {
 
 	public static PlayersFileManager getPlayersFile() {
 		return playersFileManager;
+	}
+
+	public static LevelsFileManager getLevelsFile() {
+		return levelsFileManager;
 	}
 }
