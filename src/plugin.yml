@@ -11,3 +11,4 @@ commands:
   setgroup:
   grouppermission:
   levelmodify:
+  levelinfo:

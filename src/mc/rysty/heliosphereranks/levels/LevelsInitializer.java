@@ -79,7 +79,7 @@ public class LevelsInitializer {
         }
     }
 
-    private static int getXpRequirementForLevel(int level) {
+    public static int getXpRequirementForLevel(int level) {
         if (config.getString("level-requirement." + level) != null)
             return config.getInt("level-requirement." + level);
         return 1000000000;
