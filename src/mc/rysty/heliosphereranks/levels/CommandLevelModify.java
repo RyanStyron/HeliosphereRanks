@@ -42,20 +42,23 @@ public class CommandLevelModify implements CommandExecutor, TabCompleter {
 
                         if (modificationArgument.equals("add") || modificationArgument.equals("remove")) {
                             try {
-                                modificationValue = Integer.parseInt(amountArgument);
+                                modificationValue = Math.abs(Integer.parseInt(amountArgument));
                             } catch (NumberFormatException exception) {
                                 MessageUtils.configStringMessage(sender, "leveling.argument-error");
                             }
 
                             if (modificationArgument.equals("add")) {
-                                levelsFile.set("users." + playerId + ".xp", currentXp + modificationValue);
-                                MessageUtils.configStringMessage(target, "leveling.xp-awarded-target-message", "<xp>",
-                                        amountArgument);
-                                MessageUtils.configStringMessage(sender, "leveling.xp-awarded-message");
+                                if (currentXp + modificationValue <= 10000000) {
+                                    levelsFile.set("users." + playerId + ".xp", currentXp + modificationValue);
+                                    MessageUtils.configStringMessage(target, "leveling.xp-awarded-target-message",
+                                            "<xp>", "" + modificationValue);
+                                    MessageUtils.configStringMessage(sender, "leveling.xp-awarded-message");
+                                } else
+                                    MessageUtils.configStringMessage(sender, "leveling.xp-awarded-error");
                             } else if (currentXp - modificationValue >= 0) {
                                 levelsFile.set("users." + playerId + ".xp", currentXp - modificationValue);
                                 MessageUtils.configStringMessage(target, "leveling.xp-removed-target-message", "<xp>",
-                                        amountArgument);
+                                        "" + modificationValue);
                                 MessageUtils.configStringMessage(sender, "leveling.xp-removed-message");
                             } else
                                 MessageUtils.configStringMessage(sender, "leveling.xp-removed-error");

@@ -36,6 +36,7 @@ grouppermission:
 
 leveling:
   argument-error: "&c&l(!)&f A valid amount of arguments must be provided. Usage: /levelmodify <player> <add | remove> <experience amount>"
+  xp-awarded-error: "&c&l(!)&f The user not have more than ten million experience."
   xp-removed-error: "&c&l(!)&f The user can not have a negative experience count."
   xp-awarded-message: "&6&l(!)&f The user has been awarded the experience!"
   xp-removed-message: "&6&l(!)&f The experience has been removed from the player."
