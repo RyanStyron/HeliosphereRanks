@@ -10,3 +10,4 @@ commands:
   prefix:
   setgroup:
   grouppermission:
+  levelmodify:

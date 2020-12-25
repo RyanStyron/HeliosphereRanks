@@ -33,3 +33,66 @@ grouppermission:
   group-permission-removed: "&6&l(!)&f The permission has been removed from the group."
   permission-check-true: "&6&l(!)&f The group has this permission."
   permission-check-false: "&6&l(!)&f The group does not have this permission."
+
+leveling:
+  argument-error: "&c&l(!)&f A valid amount of arguments must be provided. Usage: /levelmodify <player> <add | remove> <experience amount>"
+  xp-removed-error: "&c&l(!)&f The user can not have a negative experience count."
+  xp-awarded-message: "&6&l(!)&f The user has been awarded the experience!"
+  xp-removed-message: "&6&l(!)&f The experience has been removed from the player."
+  xp-awarded-target-message: "&6&l(!)&f You have been awarded &b<xp>&f experience!"
+  xp-removed-target-message: "&6&l(!)&f You have lost &b<xp>&f experience."
+  level-up-message: "&6&l(!)&f You have been promoted to level &b<level>&f!"
+  level-down-message: "&6&l(!)&f You have been demoted to level &b<level>&f."
+
+level-requirement:
+  0: 0
+  1: 100
+  2: 273
+  3: 369
+  4: 451
+  5: 587
+  6: 712
+  7: 945
+  8: 1013
+  9: 1098
+  10: 1300
+  11: 1371
+  12: 1465
+  13: 1567
+  14: 1782
+  15: 1953
+  16: 2089
+  17: 2145
+  18: 2456
+  19: 2703
+  20: 3001
+  21: 3457
+  22: 3981
+  23: 4012
+  24: 4787
+  25: 5100
+  26: 5625
+  27: 6492
+  28: 6789
+  29: 7189
+  30: 8500
+  31: 9503
+  32: 9708
+  33: 10000
+  34: 10950
+  35: 12501
+  36: 13487
+  37: 17805
+  38: 19045
+  39: 27907
+  40: 40508
+  41: 52876
+  42: 67893
+  43: 75000
+  44: 91875
+  45: 100000
+  46: 119874
+  47: 139035
+  48: 167904
+  49: 199605
+  50: 535353

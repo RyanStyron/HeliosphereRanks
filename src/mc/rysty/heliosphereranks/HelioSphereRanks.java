@@ -10,6 +10,8 @@ import mc.rysty.heliosphereranks.commands.CommandGroupPermission;
 import mc.rysty.heliosphereranks.commands.Nickname;
 import mc.rysty.heliosphereranks.commands.Prefix;
 import mc.rysty.heliosphereranks.commands.SetGroup;
+import mc.rysty.heliosphereranks.levels.CommandLevelModify;
+import mc.rysty.heliosphereranks.levels.LevelsInitializer;
 import mc.rysty.heliosphereranks.listeners.ListenerPlayerJoin;
 import mc.rysty.heliosphereranks.listeners.ListenerPluginEnable;
 import mc.rysty.heliosphereranks.utils.filemanagers.GroupsFileManager;
@@ -48,6 +50,10 @@ public class HelioSphereRanks extends JavaPlugin {
 		new Prefix(this);
 		new SetGroup(this);
 		new CommandGroupPermission(this);
+
+		/* Levels. */
+		LevelsInitializer.enableScheduler();
+		new CommandLevelModify(this);
 
 		System.out.println("HS-Ranks enabled");
 	}
