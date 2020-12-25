@@ -75,7 +75,7 @@ public class LevelsInitializer {
                 levelProgression = 0.999;
 
             if (updateLevelDisplay) {
-                player.setLevel(levelsFile.getInt("users." + playerId + ".level"));
+                player.setLevel(level);
                 player.setExp((float) levelProgression);
             }
             updateLevelDisplay = true;
