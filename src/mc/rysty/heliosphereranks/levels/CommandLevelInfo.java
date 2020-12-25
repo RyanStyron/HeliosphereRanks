@@ -51,7 +51,8 @@ public class CommandLevelInfo implements CommandExecutor {
                             "&6Level Progression:&e " + (Math.round(levelProgression * 100) / 100.0) * 100 + "%");
                 } else
                     MessageUtils.invalidPlayerMessage(sender);
-            }
+            } else
+                MessageUtils.noPermissionMessage(sender);
         }
         return false;
     }
