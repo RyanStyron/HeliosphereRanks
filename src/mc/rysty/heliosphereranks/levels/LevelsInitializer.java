@@ -71,6 +71,9 @@ public class LevelsInitializer {
             if (levelProgression >= 1)
                 updateLevelDisplay = false;
 
+            if (level == 50)
+                levelProgression = 0.999;
+
             if (updateLevelDisplay) {
                 player.setLevel(levelsFile.getInt("users." + playerId + ".level"));
                 player.setExp((float) levelProgression);

@@ -43,12 +43,15 @@ public class CommandLevelInfo implements CommandExecutor {
                             / (double) (totalXpNextLevel - LevelsInitializer.getXpRequirementForLevel(level));
 
                     MessageUtils.message(sender, "&3==&6Level Info:&f " + target.getDisplayName() + "&3==");
-                    MessageUtils.message(sender, "&6Level:&e " + level);
+                    MessageUtils.message(sender, "&6Level:&e " + level + (level == 50 ? " &6(&eMax&6)" : ""));
                     MessageUtils.message(sender, "&6Experience:&e " + experience);
-                    MessageUtils.message(sender, "&6Level&e " + (level + 1) + " &6Experience:&e " + totalXpNextLevel);
-                    MessageUtils.message(sender, "&6Experience Remaining:&e " + experienceLeft);
-                    MessageUtils.message(sender,
-                            "&6Level Progression:&e " + (Math.round(levelProgression * 100) / 100.0) * 100 + "%");
+                    if (level != 50) {
+                        MessageUtils.message(sender,
+                                "&6Level&e " + (level + 1) + " &6Experience:&e " + totalXpNextLevel);
+                        MessageUtils.message(sender, "&6Experience Remaining:&e " + experienceLeft);
+                        MessageUtils.message(sender,
+                                "&6Level Progression:&e " + (Math.round(levelProgression * 100) / 100.0) * 100 + "%");
+                    }
                 } else
                     MessageUtils.invalidPlayerMessage(sender);
             } else
