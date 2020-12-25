@@ -48,7 +48,7 @@ public class CommandLevelInfo implements CommandExecutor {
                     MessageUtils.message(sender, "&6Level&e " + (level + 1) + " &6Experience:&e " + totalXpNextLevel);
                     MessageUtils.message(sender, "&6Experience Remaining:&e " + experienceLeft);
                     MessageUtils.message(sender,
-                            "&6Level Progression:&e " + (Math.round(levelProgression * 10) / 10.0) * 100 + "%");
+                            "&6Level Progression:&e " + (Math.round(levelProgression * 100) / 100.0) * 100 + "%");
                 } else
                     MessageUtils.invalidPlayerMessage(sender);
             }
