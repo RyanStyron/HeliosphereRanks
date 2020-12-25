@@ -12,3 +12,4 @@ commands:
   grouppermission:
   levelmodify:
   levelinfo:
+  levelleaderboard:
