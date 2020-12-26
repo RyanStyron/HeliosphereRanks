@@ -13,7 +13,9 @@ import mc.rysty.heliosphereranks.commands.SetGroup;
 import mc.rysty.heliosphereranks.levels.CommandLevelInfo;
 import mc.rysty.heliosphereranks.levels.CommandLevelLeaderboard;
 import mc.rysty.heliosphereranks.levels.CommandLevelModify;
+import mc.rysty.heliosphereranks.levels.CommandMonetaryModify;
 import mc.rysty.heliosphereranks.levels.LevelsInitializer;
+import mc.rysty.heliosphereranks.levels.MonetaryInitializer;
 import mc.rysty.heliosphereranks.listeners.ListenerPlayerJoin;
 import mc.rysty.heliosphereranks.listeners.ListenerPluginEnable;
 import mc.rysty.heliosphereranks.utils.filemanagers.GroupsFileManager;
@@ -55,9 +57,11 @@ public class HelioSphereRanks extends JavaPlugin {
 
 		/* Levels. */
 		LevelsInitializer.enableScheduler();
+		MonetaryInitializer.enableScheduler();
 		new CommandLevelModify(this);
 		new CommandLevelInfo(this);
 		new CommandLevelLeaderboard(this);
+		new CommandMonetaryModify(this);
 
 		System.out.println("HS-Ranks enabled");
 	}

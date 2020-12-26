@@ -45,6 +45,10 @@ leveling:
   level-up-message: "&6&l(!)&f You have been promoted to level &b<level>&f!"
   level-down-message: "&6&l(!)&f You have been demoted to level &b<level>&f."
 
+monetary:
+  emeralds-set-message: "&6&l(!)&f The user's emerald balance has been set to &b<emeralds>&f!"
+  diamonds-set-message: "&6&l(!)&f The user's diamond balance has been set to &b<diamonds>&f!"
+
 level-requirement:
   0: 0
   1: 100
